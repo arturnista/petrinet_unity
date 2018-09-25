@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class PetriNet {
 
-	private PetriNetPlace entryPoint;
 	private List<PetriNetElement> elements;
 	private List<PetriNetPlace> places;
 	private List<PetriNetTransition> transitions;
@@ -18,6 +17,7 @@ public class PetriNet {
 
 	public PetriNet () {
 		elements = new List<PetriNetElement> ();
+
 		transitions = new List<PetriNetTransition> ();
 		places = new List<PetriNetPlace> ();
 		arcs = new List<PetriNetArc> ();
@@ -54,36 +54,36 @@ public class PetriNet {
 		}
 	}
 
-	public void CreateArc (string input, string output, int weight = 1) {
-		PetriNetElement inputElement = elements.Find (x => x.Name == input);
-		PetriNetElement outputElement = elements.Find (x => x.Name == output);
+	public bool CreateArc (string input, string output, int weight = 1) {
+		// Place => Transition
+		PetriNetPlace inputPlace = places.Find (x => x.Name == input);
+		if (inputPlace != null) {
+			PetriNetTransition outputTransition = transitions.Find (x => x.Name == output);
+			if (outputTransition != null) return false;
 
-		if (inputElement != null && outputElement != null) {
-			PetriNetArc arc = new PetriNetArc (inputElement, outputElement, weight);
+			PetriNetArc arc = new PetriNetArc (inputPlace, outputTransition, weight);
 			arcs.Add (arc);
+			return true;
 		}
+
+		// Transition => Place
+		PetriNetTransition inputTransition = transitions.Find (x => x.Name == input);
+		if (inputTransition != null) {
+			PetriNetPlace outputPlace = places.Find (x => x.Name == output);
+			if (outputPlace != null) return false;
+
+			PetriNetArc arc = new PetriNetArc (inputTransition, outputPlace, weight);
+			arcs.Add (arc);
+			return true;
+		}
+
+		return false;
 	}
 
 	public void Process () {
 		foreach (PetriNetTransition transition in transitions) {
 			transition.Process ();
 		}
-	}
-
-	public void Show () {
-		string line = "";
-		// PetriNetTransition transition;
-		// PetriNetPlace place;
-		// PetriNetArc arc = arcs[0];
-
-		// foreach (PetriNetArc arc in arcs) {
-		// 	if (line == "") {
-		// 		line += arc.Input.Name + "|" + arc.Input.Markers;
-		// 	}
-		// 	line += " ---" + arc.Weight + "--> " + arc.Output.Name + "|" + arc.Output.Markers;
-		// }
-
-		Debug.Log (line);
 	}
 
 }
