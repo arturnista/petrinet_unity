@@ -23,6 +23,13 @@ public class PetriNet {
 		arcs = new List<PetriNetArc> ();
 	}
 
+	public void Clear () {
+		elements.Clear ();
+		transitions.Clear ();
+		places.Clear ();
+		arcs.Clear ();
+	}
+
 	public PetriNetElement GetElement (string name) {
 		return elements.Find (x => x.Name == name);
 	}
@@ -47,19 +54,12 @@ public class PetriNet {
 		transitions.Add (transition);
 	}
 
-	public void AddMarkers (string name, int amount) {
-		PetriNetPlace place = places.Find (x => x.Name == name);
-		if (place != null) {
-			place.AddMarkers (amount);
-		}
-	}
-
 	public bool CreateArc (string input, string output, int weight = 1) {
 		// Place => Transition
 		PetriNetPlace inputPlace = places.Find (x => x.Name == input);
 		if (inputPlace != null) {
 			PetriNetTransition outputTransition = transitions.Find (x => x.Name == output);
-			if (outputTransition != null) return false;
+			if (outputTransition == null) return false;
 
 			PetriNetArc arc = new PetriNetArc (inputPlace, outputTransition, weight);
 			arcs.Add (arc);
@@ -70,17 +70,35 @@ public class PetriNet {
 		PetriNetTransition inputTransition = transitions.Find (x => x.Name == input);
 		if (inputTransition != null) {
 			PetriNetPlace outputPlace = places.Find (x => x.Name == output);
-			if (outputPlace != null) return false;
+			if (outputPlace == null) return false;
 
 			PetriNetArc arc = new PetriNetArc (inputTransition, outputPlace, weight);
 			arcs.Add (arc);
 			return true;
 		}
-
+		Debug.Log ("3");
 		return false;
 	}
 
+	public void AddListener (string name, PetriNetTransition.Listener callback) {
+		PetriNetTransition transition = transitions.Find (x => x.Name == name);
+		if (transition != null) {
+			transition.AddListener (callback);
+		}
+	}
+
+	public void AddMarkers (string name, int amount) {
+		PetriNetPlace place = places.Find (x => x.Name == name);
+		if (place != null) {
+			place.AddMarkers (amount);
+			Process ();
+		}
+	}
+
 	public void Process () {
+		foreach (PetriNetTransition transition in transitions) {
+			transition.PreProcess ();
+		}
 		foreach (PetriNetTransition transition in transitions) {
 			transition.Process ();
 		}
