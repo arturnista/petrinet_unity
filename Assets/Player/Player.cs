@@ -5,6 +5,9 @@ using UnityEngine;
 public class Player : MonoBehaviour {
 
 	[SerializeField]
+	private GameObject bulletPrefab;
+
+	[SerializeField]
 	private float moveSpeed = 2f;
 	[SerializeField]
 	private float acceleration = 10f;
@@ -46,5 +49,15 @@ public class Player : MonoBehaviour {
 			GameController.main.petriNet.AddMarkers ("experience", 1);
 			Debug.Log ("" + levelPlace.Markers + " EXP: " + experiencePlace.Markers);
 		}
+
+		if(Input.GetMouseButtonDown(0)) {
+			InvokeRepeating("Fire", 0f, .1f);
+		} else if(Input.GetMouseButtonUp(0)) {
+			CancelInvoke();
+		}
+	}
+
+	void Fire() {
+		Instantiate(bulletPrefab, transform.position, transform.rotation);
 	}
 }
