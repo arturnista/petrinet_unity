@@ -25,6 +25,16 @@ public class GameController : MonoBehaviour {
 
 		bool arcCreated = petriNet.CreateArc ("experience", "level_up", 10);
 		arcCreated = petriNet.CreateArc ("level_up", "level");
+
+		petriNet.CreatePlace ("room_01_key_01");
+		petriNet.CreatePlace ("room_01_key_02");
+		petriNet.CreatePlace ("room_01_door");
+
+		petriNet.CreateTransition ("room_01_open_door");
+
+		petriNet.CreateArc ("room_01_key_01", "room_01_open_door");
+		petriNet.CreateArc ("room_01_key_02", "room_01_open_door");
+		petriNet.CreateArc ("room_01_open_door", "room_01_door");
 	}
 
 }

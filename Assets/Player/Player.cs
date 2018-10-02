@@ -5,9 +5,6 @@ using UnityEngine;
 public class Player : MonoBehaviour {
 
 	[SerializeField]
-	private GameObject bulletPrefab;
-
-	[SerializeField]
 	private float moveSpeed = 2f;
 	[SerializeField]
 	private float acceleration = 10f;
@@ -17,6 +14,8 @@ public class Player : MonoBehaviour {
 	private Rigidbody2D mRigidbody;
 	private PetriNetPlace levelPlace;
 	private PetriNetPlace experiencePlace;
+
+	private float angle = 0;
 
 	void Awake () {
 		mRigidbody = GetComponent<Rigidbody2D> ();
@@ -28,36 +27,44 @@ public class Player : MonoBehaviour {
 		GameController.main.petriNet.AddListener ("level_up", () => {
 			Debug.Log ("Levelup! " + levelPlace.Markers);
 		});
+
+		GameController.main.petriNet.AddListener("room_01_open_door", () => {
+			Debug.Log("The door is now open!");
+		});
 	}
 
 	void Update () {
 		float hor = Input.GetAxisRaw ("Horizontal");
 		float ver = Input.GetAxisRaw ("Vertical");
 
-		Vector2 moveVelocity = transform.up * ver + transform.right * hor;
-		desideredVelocity = moveVelocity * moveSpeed;
+		if(ver > 0) angle = 0f;
+		else if(ver < 0) angle = 180f;
+		if(hor > 0) angle = -90f;
+		else if(hor < 0) angle = 90f;
+		transform.eulerAngles = new Vector3 (0f, 0f, angle);
 
+		float mult = 0;
+		if(ver != 0) mult = Mathf.Abs(ver);
+		else if(hor != 0) mult = Mathf.Abs(hor);
+
+		Vector2 moveVelocity = transform.up * mult;
+		desideredVelocity = moveVelocity * moveSpeed;
 		mRigidbody.velocity = Vector2.MoveTowards (mRigidbody.velocity, desideredVelocity, acceleration * Time.deltaTime);
 
-		Vector3 mousePos = Camera.main.ScreenToWorldPoint (Input.mousePosition);
-		Vector3 direction = Vector3.Normalize (transform.position - mousePos);
-		float angle = Mathf.Atan2 (direction.y, direction.x) * Mathf.Rad2Deg;
-
-		transform.eulerAngles = new Vector3 (0f, 0f, angle + 90f);
-
-		if (Input.GetKeyDown (KeyCode.Space)) {
+		if (Input.GetKeyDown (KeyCode.P)) {
 			GameController.main.petriNet.AddMarkers ("experience", 1);
 			Debug.Log ("" + levelPlace.Markers + " EXP: " + experiencePlace.Markers);
 		}
 
-		if(Input.GetMouseButtonDown(0)) {
-			InvokeRepeating("Fire", 0f, .1f);
-		} else if(Input.GetMouseButtonUp(0)) {
+		if(Input.GetKeyDown(KeyCode.Space)) {
+			InvokeRepeating("Attack", 0f, .1f);
+		} else if(Input.GetKeyDown(KeyCode.Space)) {
 			CancelInvoke();
 		}
 	}
 
-	void Fire() {
-		Instantiate(bulletPrefab, transform.position, transform.rotation);
+	void Attack() {
+
 	}
+	
 }
