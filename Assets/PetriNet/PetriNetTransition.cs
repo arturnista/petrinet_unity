@@ -42,7 +42,7 @@ public class PetriNetTransition : PetriNetElement {
             place.AddMarkers (outputArc.Weight);
         }
 
-        foreach (Listener list in listeners) list ();
+        foreach (Listener list in listeners) list();
 
         return true;
     }

@@ -99,9 +99,13 @@ public class PetriNet {
 		foreach (PetriNetTransition transition in transitions) {
 			transition.PreProcess ();
 		}
+
+		bool atLeastOneProcessed = false;
 		foreach (PetriNetTransition transition in transitions) {
-			transition.Process ();
+			if(transition.Process ()) atLeastOneProcessed = true;
 		}
+
+		if(atLeastOneProcessed) this.Process();
 	}
 
 }

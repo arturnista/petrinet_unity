@@ -36,7 +36,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4199281819069412}
   - component: {fileID: 61006396287616448}
-  - component: {fileID: 114200982554027192}
+  - component: {fileID: 114132996662510042}
   m_Layer: 0
   m_Name: Door
   m_TagString: Untagged
@@ -51,7 +51,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1912531637291856}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 7.68, z: 0}
+  m_LocalPosition: {x: 2.5, y: 6.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4528507636770348}
@@ -96,7 +96,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &114200982554027192
+--- !u!114 &114132996662510042
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -104,10 +104,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1912531637291856}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a105f357d6610498b807096dca5cf516, type: 3}
+  m_Script: {fileID: 11500000, guid: 69b877a77c24f4b20ad3cb6d522acb98, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   petriName: room_01_open_door
+  openSprite: {fileID: 21300000, guid: ec32f9892cd7442d8b32446af905867b, type: 3}
 --- !u!212 &212010935947757634
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -142,8 +143,8 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 33604892fcbe14abfbcf0a7a6370af48, type: 3}
+  m_SortingOrder: 5
+  m_Sprite: {fileID: 21300000, guid: fd49b0d70a3a24fb8b27c47bb8f7d9c8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
