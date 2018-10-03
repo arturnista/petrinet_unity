@@ -16,6 +16,10 @@ public class PetriNetPlace : PetriNetElement {
         markers = 0;
     }
 
+    public void SetMarkers (int amount) {
+        markers = amount;
+    }
+
     public void RemoveMarker () {
         RemoveMarkers (1);
     }

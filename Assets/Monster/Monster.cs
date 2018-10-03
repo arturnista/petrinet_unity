@@ -21,7 +21,6 @@ public class Monster : MonoBehaviour {
 	void OnCollisionEnter2D(Collision2D coll) {
 		Player player = coll.collider.GetComponent<Player>();
 		if(player) {
-			Debug.Log("NAo?");
 			player.TakeDamage(10f, transform.position);
 		}
 	}

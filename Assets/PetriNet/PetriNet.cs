@@ -23,6 +23,46 @@ public class PetriNet {
 		arcs = new List<PetriNetArc> ();
 	}
 
+	public void Update (string fileData) {
+		arcs = new List<PetriNetArc> (); // Arcs must be recreated
+
+		string[] strElements = fileData.Split('\n');
+		foreach(string ele in strElements) {
+			string[] data = ele.Split(';');
+			switch(data[0]) {
+				case "P":
+					PetriNetPlace place = GetPlace(data[1]);
+					if(place == null) {
+						place = CreatePlace(data[1]);
+					}
+					place.SetMarkers(int.Parse(data[2]));
+					break;
+				case "T":
+					PetriNetTransition transition = GetTransition(data[1]);
+					if(transition == null) CreateTransition(data[1]);
+					break;
+				case "A":
+					CreateArc(data[1], data[2], int.Parse(data[3]));
+					break;
+			}
+		}
+	}
+
+	public override string ToString() {
+		string data = "";
+		foreach(PetriNetPlace place in places) {
+			data += "P;" + place.Name + ";" + place.Markers + "\n";
+		}
+		foreach(PetriNetTransition transition in transitions) {
+			data += "T;" + transition.Name + "\n";
+		}
+		foreach(PetriNetArc arc in arcs) {
+			data += "A;" + arc.Input.Name + ";" + arc.Output.Name + ";" + arc.Weight + "\n";
+		}
+
+		return data;
+	}
+
 	public void Clear () {
 		elements.Clear ();
 		transitions.Clear ();
@@ -42,10 +82,12 @@ public class PetriNet {
 		return transitions.Find (x => x.Name == name);
 	}
 
-	public void CreatePlace (string name) {
+	public PetriNetPlace CreatePlace (string name) {
 		PetriNetPlace place = new PetriNetPlace (name);
 		elements.Add (place);
 		places.Add (place);
+
+		return place;
 	}
 
 	public void CreateTransition (string name) {
@@ -76,7 +118,6 @@ public class PetriNet {
 			arcs.Add (arc);
 			return true;
 		}
-		Debug.Log ("3");
 		return false;
 	}
 
