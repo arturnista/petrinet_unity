@@ -34,6 +34,7 @@ public class GameController : MonoBehaviour {
 	void CreateNet() {
 		
 		mPetriNet = new PetriNet ();
+		mPetriNet.Clear();
 
 		petriNet.CreatePlace ("magic_orb");
 		petriNet.CreatePlace ("magic_orb_picked");
@@ -52,9 +53,9 @@ public class GameController : MonoBehaviour {
 		petriNet.CreateArc ("magic_orb_pickup", "room_01_requirement");
 
 		petriNet.CreateTransition ("room_01_open_door");
-		petriNet.CreatePlace ("room_01_door");
+		petriNet.CreatePlace ("room_02_final");
 		petriNet.CreateArc ("room_01_requirement", "room_01_open_door");
-		petriNet.CreateArc ("room_01_open_door", "room_01_door");
+		petriNet.CreateArc ("room_01_open_door", "room_02_final");
 
 		petriNet.AddListener("room_01_open_door", () => {
 
@@ -63,18 +64,39 @@ public class GameController : MonoBehaviour {
 		petriNet.CreatePlace ("room_02_enemies");
 		petriNet.CreateTransition ("room_02_enemies_killed");
 		petriNet.CreatePlace ("room_02_requirement");
-		petriNet.CreateTransition ("room_02_door");
+		petriNet.CreateTransition ("room_02_open_door");
 		petriNet.CreatePlace ("room_02_final");
 		
-		petriNet.CreateArc ("room_02_enemies", "room_02_enemies_killed", 5);
+		petriNet.CreateArc ("room_02_enemies", "room_02_enemies_killed");
 		petriNet.CreateArc ("room_02_enemies_killed", "room_02_requirement");
-		petriNet.CreateArc ("room_02_requirement", "room_02_door");
+		petriNet.CreateArc ("room_02_requirement", "room_02_open_door");
 		
-		petriNet.CreateArc ("room_02_door", "room_02_final");
+		petriNet.CreateArc ("room_02_open_door", "room_02_final");
 
+		petriNet.AddListener("room_02_enemies_killed", () => {
+			Debug.Log("room_02_enemies_killed");
+		});
+	
+		petriNet.CreatePlace ("room_02_button_press");
+		petriNet.CreatePlace ("room_02_button_is_down");
+		petriNet.CreateTransition ("room_02_button_down");
+		petriNet.CreatePlace ("room_02_button_is_up");
+		petriNet.CreateTransition ("room_02_button_up");
+
+		petriNet.CreateArc("room_02_button_is_down", "room_02_button_up");
+		petriNet.CreateArc("room_02_button_press", "room_02_button_up");
+
+		petriNet.CreateArc("room_02_button_is_up", "room_02_button_down");
+		petriNet.CreateArc("room_02_button_press", "room_02_button_down");
+
+		petriNet.CreateArc("room_02_button_down", "room_02_button_is_down");
+		petriNet.CreateArc("room_02_button_up", "room_02_button_is_up");
+
+		petriNet.AddMarkers("room_02_button_is_up", 1);
 	}
 	
 	void SaveFile() {
+		Debug.Log("File Saved");
         string path = "./petri_net.txt";
 
         //Write some text to the test.txt file
@@ -84,6 +106,7 @@ public class GameController : MonoBehaviour {
 	}
 
 	void LoadFile() {
+		Debug.Log("File Loaded");
         string path = "./petri_net.txt";
 
         //Read the text from directly from the test.txt file

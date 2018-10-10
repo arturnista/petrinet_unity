@@ -23,7 +23,7 @@ public class PlayerHealth : MonoBehaviour {
 	}
 	
 	void Update () {
-		healthText.text = "Health: " + health;
+		healthText.text = "Health: " + maxHealth;
 	}
 
 	public void TakeDamage(float dmg, Vector3 enemyPosition) {

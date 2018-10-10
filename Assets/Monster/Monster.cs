@@ -2,6 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
+class PatrolPosition {
+	public Vector3 position;
+	public float wait;
+}
+
 public class Monster : MonoBehaviour {
 
 	public string petriName;
@@ -9,13 +15,61 @@ public class Monster : MonoBehaviour {
 
 	private Rigidbody2D mRigidbody;
 
-	void Start () {
+	[SerializeField]
+	public float patrolMoveSpeed;
+	[SerializeField]
+	public float moveSpeed;
+	[SerializeField]
+	private List<PatrolPosition> patrolList;
+	private int patrolIndex;
+
+	private bool isPatroling;
+	private bool isWaitingPatrol;
+	private float waitingPatrolTime;
+
+	private GameObject target;
+
+	private float maxHealth;
+
+	void Awake () {
 		mRigidbody = GetComponent<Rigidbody2D>();
-		// RandomVelocity();
+
+		maxHealth = health;
+		patrolIndex = 0;
+		isPatroling = true;
 	}
 	
 	void Update () {
-		
+
+		if(isPatroling) {
+
+			if(isWaitingPatrol) {
+
+				waitingPatrolTime += Time.deltaTime;
+				if(waitingPatrolTime > patrolList[patrolIndex].wait) {
+					isWaitingPatrol = false;
+					patrolIndex = (patrolIndex + 1) % patrolList.Count;
+				}
+
+			} else {
+
+				Vector3 nPos = patrolList[patrolIndex].position;
+				if(Vector3.Distance(transform.position, nPos) < .1f) {
+					isWaitingPatrol = true;
+					waitingPatrolTime = 0;
+				} else {
+					transform.position = Vector3.MoveTowards(transform.position, nPos, patrolMoveSpeed * Time.deltaTime);
+				}
+
+			}
+
+
+		} else {
+
+			transform.position = Vector3.MoveTowards(transform.position, target.transform.position, moveSpeed * Time.deltaTime);			
+
+		}
+
 	}
 
 	void OnCollisionEnter2D(Collision2D coll) {
@@ -25,10 +79,9 @@ public class Monster : MonoBehaviour {
 		}
 	}
 
-	void RandomVelocity() {
-		float x = Random.Range(-3f, 3f);
-		float y = Random.Range(-3f, 3f);
-		mRigidbody.velocity = new Vector3(x, y);
+	public void FollowTarget(GameObject target) {
+		isPatroling = false;
+		this.target = target;
 	}
 
 	public void TakeDamage(float dmg) {

@@ -25,12 +25,20 @@ public class Button : MonoBehaviour {
 	}
 
 	void OnTriggerEnter2D(Collider2D coll) {
-		spriteRenderer.sprite = pressSprite;
-		GameController.main.petriNet.AddMarkers(pressPetriName, 1);
+		Rigidbody2D isRigid = coll.GetComponent<Rigidbody2D>();
+		if(isRigid == null) return;
+		
+		if(amount == 0) {
+			spriteRenderer.sprite = pressSprite;
+			GameController.main.petriNet.AddMarkers(pressPetriName, 1);
+		}
 		amount++;
 	}
 
 	void OnTriggerExit2D(Collider2D coll) {
+		Rigidbody2D isRigid = coll.GetComponent<Rigidbody2D>();
+		if(isRigid == null) return;
+		
 		amount--;
 		if(amount <= 0) {
 			amount = 0;
