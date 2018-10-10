@@ -56,16 +56,6 @@ public class GameController : MonoBehaviour {
 		petriNet.CreateArc ("room_01_requirement", "room_01_open_door");
 		petriNet.CreateArc ("room_01_open_door", "room_01_door");
 
-		petriNet.AddListener("axe_pickup", () => {
-			PickUpItem[] items = GameObject.FindObjectsOfType<PickUpItem>();
-			foreach(PickUpItem it in items) Destroy(it.gameObject);
-		});
-
-		petriNet.AddListener("magic_orb_pickup", () => {
-			PickUpItem[] items = GameObject.FindObjectsOfType<PickUpItem>();
-			foreach(PickUpItem it in items) Destroy(it.gameObject);
-		});
-
 		petriNet.AddListener("room_01_open_door", () => {
 
 		});

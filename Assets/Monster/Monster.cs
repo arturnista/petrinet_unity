@@ -11,7 +11,7 @@ public class Monster : MonoBehaviour {
 
 	void Start () {
 		mRigidbody = GetComponent<Rigidbody2D>();
-		RandomVelocity();
+		// RandomVelocity();
 	}
 	
 	void Update () {
@@ -19,7 +19,7 @@ public class Monster : MonoBehaviour {
 	}
 
 	void OnCollisionEnter2D(Collision2D coll) {
-		Player player = coll.collider.GetComponent<Player>();
+		PlayerHealth player = coll.collider.GetComponent<PlayerHealth>();
 		if(player) {
 			player.TakeDamage(10f, transform.position);
 		}

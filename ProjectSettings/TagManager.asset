@@ -14,11 +14,11 @@ TagManager:
   - 
   - 
   - Player
-  - Monster
-  - Rock
-  - 
-  - 
-  - 
+  - PlayerProjectile
+  - Enemy
+  - EnemyProjectile
+  - Props
+  - Map
   - 
   - 
   - 
