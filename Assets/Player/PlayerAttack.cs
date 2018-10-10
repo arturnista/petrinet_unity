@@ -78,17 +78,15 @@ public class PlayerAttack : MonoBehaviour {
 		float playerHalfSize = 1.5f;
 		Vector2 origin = transform.position + transform.up * playerHalfSize;
 
-		float angle = transform.eulerAngles.z;
-		
-		DebugPhysics.Box box = new DebugPhysics.Box(origin, size / 2f, Quaternion.AngleAxis(angle, Vector3.forward));
+		DebugPhysics.Box box = new DebugPhysics.Box(origin, size / 2f, Quaternion.AngleAxis(movement.Angle, Vector3.forward));
 		DebugPhysics.DrawBox(box, Color.red, 2f);
 
-		Collider2D[] colliders = Physics2D.OverlapBoxAll(origin, size, angle, attackLayer);
+		Collider2D[] colliders = Physics2D.OverlapBoxAll(origin, size, movement.Angle, attackLayer);
 		DamageMonsters(colliders, 1f);
 	}
 
 	void FrontAttack() {
-		Instantiate(attackProjectilePrefab, transform.position, transform.rotation);
+		Instantiate(attackProjectilePrefab, transform.position, Quaternion.AngleAxis(movement.Angle, Vector3.forward));
 	}
 
 	void SpinAttack() {

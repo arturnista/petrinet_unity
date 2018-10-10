@@ -24,17 +24,37 @@ public class PlayerMovement : MonoBehaviour {
 		}
 	}
 
+	public bool isActive;
+
 	private Rigidbody2D mRigidbody;
 
 	private float angle = 0;
+	public float Angle {
+		get {
+			return angle;
+		}
+	}
 
 	void Awake () {
 		mRigidbody = GetComponent<Rigidbody2D> ();
 		moveSpeedMultiplier = 1f;
+		isActive = true;
 	}
 
 	void Update () {
-		
+		if(isActive) {
+			desideredVelocity = GetMoveVelocity();
+		} else {
+			desideredVelocity = Vector2.zero;
+		}
+
+		currentVelocity = Vector2.MoveTowards (currentVelocity, desideredVelocity, acceleration * Time.deltaTime);
+		mRigidbody.velocity = currentVelocity + extraVelocity;
+
+		extraVelocity = Vector2.MoveTowards(extraVelocity, Vector2.zero, 10f * Time.deltaTime);
+	}
+
+	public Vector2 GetMoveVelocity() {
 		float hor = Input.GetAxisRaw ("Horizontal");
 		float ver = Input.GetAxisRaw ("Vertical");
 
@@ -57,12 +77,7 @@ public class PlayerMovement : MonoBehaviour {
 		if(ver != 0) mult = Mathf.Abs(ver);
 		else if(hor != 0) mult = Mathf.Abs(hor);
 
-		Vector2 moveVelocity = transform.up * mult;
-		desideredVelocity = moveVelocity * moveSpeed * moveSpeedMultiplier;
-		currentVelocity = Vector2.MoveTowards (currentVelocity, desideredVelocity, acceleration * Time.deltaTime);
-		mRigidbody.velocity = currentVelocity + extraVelocity;
-
-		extraVelocity = Vector2.MoveTowards(extraVelocity, Vector2.zero, 10f * Time.deltaTime);
+		return transform.up * mult * moveSpeed * moveSpeedMultiplier;
 	}
 
 	public void AddExtraVelocity(Vector2 eVelocity) {

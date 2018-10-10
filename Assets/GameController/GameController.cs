@@ -61,23 +61,17 @@ public class GameController : MonoBehaviour {
 		});
 
 		petriNet.CreatePlace ("room_02_enemies");
-		petriNet.CreateTransition ("room_02_open_door");
-		petriNet.CreatePlace ("room_02_door");
+		petriNet.CreateTransition ("room_02_enemies_killed");
+		petriNet.CreatePlace ("room_02_requirement");
+		petriNet.CreateTransition ("room_02_door");
+		petriNet.CreatePlace ("room_02_final");
 		
-		petriNet.CreateArc ("room_02_enemies", "room_02_open_door", 5);
-		petriNet.CreateArc ("room_02_open_door", "room_02_door");
-
-		petriNet.CreatePlace ("room_03_button_press");
-		petriNet.CreatePlace ("room_03_button_up");
-		petriNet.CreatePlace ("room_03_door_is_open");
-		petriNet.CreateTransition ("room_03_open_door");
-		petriNet.CreateTransition ("room_03_close_door");
-
-		petriNet.CreateArc ("room_03_button_press", "room_03_open_door");
-		petriNet.CreateArc ("room_03_open_door", "room_03_door_is_open");
+		petriNet.CreateArc ("room_02_enemies", "room_02_enemies_killed", 5);
+		petriNet.CreateArc ("room_02_enemies_killed", "room_02_requirement");
+		petriNet.CreateArc ("room_02_requirement", "room_02_door");
 		
-		petriNet.CreateArc ("room_03_button_up", "room_03_close_door");
-		petriNet.CreateArc ("room_03_door_is_open", "room_03_close_door");
+		petriNet.CreateArc ("room_02_door", "room_02_final");
+
 	}
 	
 	void SaveFile() {

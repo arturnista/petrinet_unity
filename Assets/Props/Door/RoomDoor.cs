@@ -13,10 +13,17 @@ public class RoomDoor : MonoBehaviour {
 	protected virtual void Start () {	
 		spriteRenderer = GetComponentInChildren<SpriteRenderer>();
 		boxCollider = GetComponent<BoxCollider2D>();
+		
 		GameController.main.petriNet.AddListener(petriName, () => {
 			spriteRenderer.sprite = openSprite;
 			boxCollider.isTrigger = true;
 		});
+	}
+
+	protected bool CheckEnd(Collider2D coll) {		
+		Player player = coll.GetComponent<Player>();
+		return player != null;
+
 	}
 	
 }

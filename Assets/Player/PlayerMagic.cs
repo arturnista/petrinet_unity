@@ -5,12 +5,15 @@ using UnityEngine;
 public class PlayerMagic : MonoBehaviour {
 
 	private PetriNetPlace magicOrbPlace;
+	private PlayerMovement movement;
 
-	private LineRenderer levitateLine;
-	private GameObject levitateObject;
-	private Vector3 levitateOffset;
+	private LineRenderer telekineseLine;
+	private Rigidbody2D telekineseRigidbody;
+	private Vector3 telekineseOffset;
 	[SerializeField]
-	private LayerMask levitateLayer;
+	private float telekineseRadius = 2f;
+	[SerializeField]
+	private LayerMask telekineseLayer;
 
 	private bool isActive {
 		get {
@@ -19,7 +22,9 @@ public class PlayerMagic : MonoBehaviour {
 	}
 
 	void Awake() {
-		levitateLine = GetComponent<LineRenderer>();		
+		movement = GetComponent<PlayerMovement>();
+		telekineseLine = GetComponent<LineRenderer>();		
+		telekineseRigidbody = null;
 	}
 
 	void Start () {
@@ -30,33 +35,35 @@ public class PlayerMagic : MonoBehaviour {
 		
 		if(isActive) {
 			if(Input.GetKeyDown(KeyCode.E)) {
-				StartLevitate();
+				Starttelekinese();
 			} else if(Input.GetKeyUp(KeyCode.E)) {
-				StopLevitate();
+				Stoptelekinese();
 			}
 		}
 
-		if(levitateObject) {
-			levitateObject.transform.position = transform.position - levitateOffset;
+		if(telekineseRigidbody) {
+			telekineseRigidbody.velocity = movement.GetMoveVelocity();
 
-			levitateLine.SetPosition(0, transform.position);
-			levitateLine.SetPosition(1, levitateObject.transform.position);
+			telekineseLine.SetPosition(0, transform.position);
+			telekineseLine.SetPosition(1, telekineseRigidbody.transform.position);
 		}
 	}
 
-	void StartLevitate() {
-		RaycastHit2D hit = Physics2D.BoxCast(transform.position + transform.up * 1.5f, Vector2.one * 1.5f, 0f, Vector2.zero, 1f, levitateLayer);
-		if(hit) {
-			levitateLine.enabled = true;
-			levitateObject = hit.transform.gameObject;
-			levitateOffset = transform.position - levitateObject.transform.position;
-			Rigidbody2D levitateRigid = levitateObject.GetComponent<Rigidbody2D>();
-			if(levitateRigid) levitateRigid.velocity = Vector2.zero;
+	void Starttelekinese() {
+		Collider2D coll = Physics2D.OverlapCircle(transform.position, telekineseRadius, telekineseLayer);
+		if(coll) {
+			movement.isActive = false;			
+			telekineseLine.enabled = true;
+			telekineseRigidbody = coll.transform.GetComponent<Rigidbody2D>();
+			telekineseOffset = transform.position - telekineseRigidbody.transform.position;
+			telekineseRigidbody.velocity = Vector2.zero;
 		}
 	}
 
-	void StopLevitate() {
-		levitateLine.enabled = false;
-		levitateObject = null;		
+	void Stoptelekinese() {
+		movement.isActive = true;
+
+		telekineseLine.enabled = false;
+		telekineseRigidbody = null;		
 	}
 }

@@ -135,6 +135,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 10
   acceleration: 50
+  isActive: 0
 --- !u!114 &114446282925534704
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -146,7 +147,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 855254f2223c34732af7d9f01efee4cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levitateLayer:
+  telekineseRadius: 2
+  telekineseLayer:
     serializedVersion: 2
     m_Bits: 4096
 --- !u!114 &114711237037094070

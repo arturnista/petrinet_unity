@@ -5,7 +5,9 @@ using UnityEngine.SceneManagement;
 
 public class RoomDoor_01 : RoomDoor {
 
-	void OnTriggerEnter2D() {
+	void OnTriggerEnter2D(Collider2D coll) {
+		if(!this.CheckEnd(coll)) return;
+
 		PetriNetPlace axePlace = GameController.main.petriNet.GetPlace ("axe_picked");
 		bool hasWeapon = axePlace.Markers > 0;
 		if(hasWeapon) {
