@@ -6,6 +6,7 @@ public class PlayerAttack : MonoBehaviour {
 
 	private PetriNetPlace axePlace;
 	private PlayerMovement movement;
+	private SpriteRenderer attackIndicatorSprite;
 
 	[SerializeField]
 	private float damage;
@@ -15,8 +16,13 @@ public class PlayerAttack : MonoBehaviour {
 	private GameObject attackEffectPrefab;
 	[SerializeField]
 	private GameObject attackProjectilePrefab;
+	[SerializeField]
+	private float frontAttackTime = .5f;
+	[SerializeField]
+	private float spinAttackTime = 1f;
 	private float attackStartTime;
 	private bool isChargingAttack;
+	private float chargeTime;
 
 	private bool isActive {
 		get {
@@ -26,6 +32,8 @@ public class PlayerAttack : MonoBehaviour {
 
 	void Awake() {
 		movement = GetComponent<PlayerMovement>();
+		attackIndicatorSprite = transform.Find("SpriteAttackIndicator").GetComponent<SpriteRenderer>();
+		attackIndicatorSprite.enabled = false;
 	}
 
 	void Start () {
@@ -44,7 +52,11 @@ public class PlayerAttack : MonoBehaviour {
 		}
 
 		if(isChargingAttack) {
-
+			chargeTime += Time.deltaTime;
+			
+			if(chargeTime < frontAttackTime) attackIndicatorSprite.color = Color.white;
+			else if(chargeTime < spinAttackTime) attackIndicatorSprite.color = Color.blue;
+			else attackIndicatorSprite.color = Color.red;
 		}
 	}
 
@@ -53,15 +65,18 @@ public class PlayerAttack : MonoBehaviour {
 		isChargingAttack = true;
 		
 		movement.MoveSpeedMultiplier = .3f;
+		chargeTime = 0f;
+		attackIndicatorSprite.enabled = true;
 	}
 
 	void StopAttack() {
 		float attackHoldTime = Time.time - attackStartTime;		
 		isChargingAttack = false;
+		attackIndicatorSprite.enabled = false;
 
-		if(attackHoldTime < .5f) {
+		if(attackHoldTime < frontAttackTime) {
 			BasicAttack();
-		} else if(attackHoldTime < 1f) {
+		} else if(attackHoldTime < spinAttackTime) {
 			FrontAttack();
 		} else {
 			SpinAttack();
