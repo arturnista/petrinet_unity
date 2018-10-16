@@ -42,14 +42,14 @@ public class GameController : MonoBehaviour {
 		petriNet.CreateArc ("magic_orb", "magic_orb_pickup");
 		petriNet.CreateArc ("magic_orb_pickup", "magic_orb_picked");
 
-		petriNet.CreatePlace ("axe");
-		petriNet.CreatePlace ("axe_picked");
-		petriNet.CreateTransition ("axe_pickup");
-		petriNet.CreateArc ("axe", "axe_pickup");
-		petriNet.CreateArc ("axe_pickup", "axe_picked");
+		petriNet.CreatePlace ("weapon");
+		petriNet.CreatePlace ("weapon_picked");
+		petriNet.CreateTransition ("weapon_pickup");
+		petriNet.CreateArc ("weapon", "weapon_pickup");
+		petriNet.CreateArc ("weapon_pickup", "weapon_picked");
 
 		petriNet.CreatePlace ("room_01_requirement");
-		petriNet.CreateArc ("axe_pickup", "room_01_requirement");
+		petriNet.CreateArc ("weapon_pickup", "room_01_requirement");
 		petriNet.CreateArc ("magic_orb_pickup", "room_01_requirement");
 
 		petriNet.CreateTransition ("room_01_open_door");

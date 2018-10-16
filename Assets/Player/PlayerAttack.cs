@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerAttack : MonoBehaviour {
 
-	private PetriNetPlace axePlace;
+	private PetriNetPlace weaponPlace;
 	private PlayerMovement movement;
 	private SpriteRenderer attackIndicatorSprite;
 
@@ -26,7 +26,7 @@ public class PlayerAttack : MonoBehaviour {
 
 	private bool isActive {
 		get {
-			return axePlace.Markers > 0;
+			return weaponPlace.Markers > 0;
 		}
 	}
 
@@ -37,7 +37,7 @@ public class PlayerAttack : MonoBehaviour {
 	}
 
 	void Start () {
-		axePlace = GameController.main.petriNet.GetPlace ("axe_picked");		
+		weaponPlace = GameController.main.petriNet.GetPlace ("weapon_picked");		
 	}
 	
 	void Update () {
