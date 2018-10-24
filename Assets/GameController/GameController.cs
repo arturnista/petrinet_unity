@@ -53,9 +53,9 @@ public class GameController : MonoBehaviour {
 		petriNet.CreateArc ("magic_orb_pickup", "room_01_requirement");
 
 		petriNet.CreateTransition ("room_01_open_door");
-		petriNet.CreatePlace ("room_02_final");
+		petriNet.CreatePlace ("room_01_final");
 		petriNet.CreateArc ("room_01_requirement", "room_01_open_door");
-		petriNet.CreateArc ("room_01_open_door", "room_02_final");
+		petriNet.CreateArc ("room_01_open_door", "room_01_final");
 
 		petriNet.AddListener("room_01_open_door", () => {
 
