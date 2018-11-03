@@ -165,7 +165,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   petriName: room_02_enemies
-  health: 50
+  health: 100
   patrolMoveSpeed: 2
   moveSpeed: 4
   patrolList:

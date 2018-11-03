@@ -1,4 +1,4 @@
-# petrinet_unity
+# Untitled Dungeon Crawler
 
 PetriNet code at ```/Assets/PetriNet```
 

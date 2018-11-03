@@ -17,8 +17,6 @@ public class PlayerAttack : MonoBehaviour {
 	[SerializeField]
 	private GameObject attackProjectilePrefab;
 	[SerializeField]
-	private float frontAttackTime = .5f;
-	[SerializeField]
 	private float spinAttackTime = 1f;
 	private float attackStartTime;
 	private bool isChargingAttack;
@@ -54,8 +52,7 @@ public class PlayerAttack : MonoBehaviour {
 		if(isChargingAttack) {
 			chargeTime += Time.deltaTime;
 			
-			if(chargeTime < frontAttackTime) attackIndicatorSprite.color = Color.white;
-			else if(chargeTime < spinAttackTime) attackIndicatorSprite.color = Color.blue;
+			if(chargeTime < spinAttackTime) attackIndicatorSprite.color = Color.white;
 			else attackIndicatorSprite.color = Color.red;
 		}
 	}
@@ -74,10 +71,8 @@ public class PlayerAttack : MonoBehaviour {
 		isChargingAttack = false;
 		attackIndicatorSprite.enabled = false;
 
-		if(attackHoldTime < frontAttackTime) {
+		if(attackHoldTime < spinAttackTime) {
 			BasicAttack();
-		} else if(attackHoldTime < spinAttackTime) {
-			FrontAttack();
 		} else {
 			SpinAttack();
 		}
@@ -100,10 +95,6 @@ public class PlayerAttack : MonoBehaviour {
 		DamageMonsters(colliders, 1f);
 	}
 
-	void FrontAttack() {
-		Instantiate(attackProjectilePrefab, transform.position, Quaternion.AngleAxis(movement.Angle, Vector3.forward));
-	}
-
 	void SpinAttack() {
 		float range = 4f;
 
@@ -117,7 +108,7 @@ public class PlayerAttack : MonoBehaviour {
 		foreach (Collider2D coll in colliders) {
 			Monster monster = coll.transform.GetComponent<Monster>();
 			if(monster) {
-				monster.TakeDamage(damage * dmgMultiplier);
+				monster.TakeDamage(damage * dmgMultiplier, this.transform);
 			}
 		}
 	}

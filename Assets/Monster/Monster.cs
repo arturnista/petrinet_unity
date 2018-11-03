@@ -13,6 +13,7 @@ public class Monster : MonoBehaviour {
 	public string petriName;
 	public float health;
 
+    private Animator animator;
 	private Rigidbody2D mRigidbody;
 
 	[SerializeField]
@@ -27,12 +28,16 @@ public class Monster : MonoBehaviour {
 	private bool isWaitingPatrol;
 	private float waitingPatrolTime;
 
+	private Vector3 moveVelocity;
+	private Vector3 extraVelocity;
+
 	private GameObject target;
 
 	private float maxHealth;
 
 	void Awake () {
 		mRigidbody = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
 
 		maxHealth = health;
 		patrolIndex = 0;
@@ -66,10 +71,18 @@ public class Monster : MonoBehaviour {
 
 		} else {
 
-			transform.position = Vector3.MoveTowards(transform.position, target.transform.position, moveSpeed * Time.deltaTime);			
+			Vector3 direction = target.transform.position - transform.position;
+            moveVelocity = direction.normalized * moveSpeed;
+			if(extraVelocity.sqrMagnitude != 0) extraVelocity = Vector3.MoveTowards(extraVelocity, Vector3.zero, moveSpeed * Time.deltaTime);
+
+			//transform.position = Vector3.MoveTowards(transform.position, target.transform.position, moveSpeed * Time.deltaTime);			
 
 		}
 
+	}
+
+	void FixedUpdate() {
+        mRigidbody.velocity = moveVelocity + extraVelocity;
 	}
 
 	void OnCollisionEnter2D(Collision2D coll) {
@@ -84,7 +97,11 @@ public class Monster : MonoBehaviour {
 		this.target = target;
 	}
 
-	public void TakeDamage(float dmg) {
+	public void TakeDamage(float dmg, Transform attacker) {
+        animator.SetTrigger("take_damage");
+
+		extraVelocity = Vector3.Normalize(transform.position - attacker.position) * 6f;
+
 		health -= dmg;
 		if(health <= 0) {
 			GameController.main.petriNet.AddMarkers(petriName, 1);

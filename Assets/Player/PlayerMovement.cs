@@ -49,9 +49,11 @@ public class PlayerMovement : MonoBehaviour {
 		}
 
 		currentVelocity = Vector2.MoveTowards (currentVelocity, desideredVelocity, acceleration * Time.deltaTime);
-		mRigidbody.velocity = currentVelocity + extraVelocity;
+		extraVelocity = Vector2.MoveTowards(extraVelocity, Vector2.zero, acceleration * Time.deltaTime);
+	}
 
-		extraVelocity = Vector2.MoveTowards(extraVelocity, Vector2.zero, 10f * Time.deltaTime);
+	void FixedUpdate() {
+        mRigidbody.velocity = currentVelocity + extraVelocity;
 	}
 
 	public Vector2 GetMoveVelocity() {

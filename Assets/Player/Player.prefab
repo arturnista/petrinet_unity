@@ -200,7 +200,6 @@ MonoBehaviour:
     type: 2}
   attackProjectilePrefab: {fileID: 1442976154610390, guid: b38a69bb008f64226aaf1865913f90ca,
     type: 2}
-  frontAttackTime: 0.5
   spinAttackTime: 1
 --- !u!114 &114908301544954098
 MonoBehaviour:

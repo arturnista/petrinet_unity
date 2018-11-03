@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 20300002078956602}
   - component: {fileID: 81843422487181582}
   - component: {fileID: 114184554939631538}
+  - component: {fileID: 114636516476295812}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -66,7 +67,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 12
+  orthographic size: 6
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -100,7 +101,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a160d838ff8b4b4693ac20007e008c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_AssetsPPU: 32
+  m_AssetsPPU: 64
   m_RefResolutionX: 1024
   m_RefResolutionY: 768
   m_UpscaleRT: 0
@@ -108,3 +109,14 @@ MonoBehaviour:
   m_CropFrameX: 0
   m_CropFrameY: 0
   m_StretchFill: 1
+--- !u!114 &114636516476295812
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1537719018417546}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb04eac034a3b0c4d97b3c5ad4a7d880, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -24,7 +24,7 @@ public class AttackProjectile : MonoBehaviour {
 	void OnTriggerEnter2D(Collider2D coll) {
 		Monster monster = coll.GetComponent<Monster>();
 		if(monster != null) {
-			monster.TakeDamage(damage);
+			monster.TakeDamage(damage, transform);
 		}
 
 		if(coll.gameObject.layer == LayerMask.NameToLayer("Map") || coll.gameObject.layer == LayerMask.NameToLayer("Props")) {
