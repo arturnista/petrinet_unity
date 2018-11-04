@@ -10,11 +10,11 @@ class PatrolPosition {
 
 public class Monster : MonoBehaviour {
 
-	public string petriName;
 	public float health;
 
     private Animator animator;
 	private Rigidbody2D mRigidbody;
+	private RoomController roomController;
 
 	[SerializeField]
 	public float patrolMoveSpeed;
@@ -42,6 +42,10 @@ public class Monster : MonoBehaviour {
 		maxHealth = health;
 		patrolIndex = 0;
 		isPatroling = true;
+	}
+
+	void Start() {
+        roomController = GameObject.FindObjectOfType<RoomController>();
 	}
 	
 	void Update () {
@@ -104,8 +108,8 @@ public class Monster : MonoBehaviour {
 
 		health -= dmg;
 		if(health <= 0) {
-			GameController.main.petriNet.AddMarkers(petriName, 1);
 			Destroy(this.gameObject);
+            roomController.MonsterDead();
 		}
 	}
 }

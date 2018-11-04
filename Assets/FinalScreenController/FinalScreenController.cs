@@ -7,6 +7,6 @@ public class FinalScreenController : MonoBehaviour {
 
 	public void Restart() {
         GameController.main.Restart();
-        SceneManager.LoadScene("Room_01", LoadSceneMode.Single);		
+        SceneManager.LoadScene("Rooms/Room_01/Scene", LoadSceneMode.Single);		
 	}
 }

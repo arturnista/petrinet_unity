@@ -4,19 +4,19 @@ using UnityEngine;
 
 public class Button : MonoBehaviour {
 
-	public string pressPetriName;
-	public string upPetriName;
-
+    public GameObject activate;
 	public Sprite pressSprite;
 	private Sprite normalSprite;
 
-	private SpriteRenderer spriteRenderer;
+    private SpriteRenderer spriteRenderer;
+	private RoomDoor door;
 	private bool isPressed;
 
 	private int amount;
 
 	void Awake () {
 		spriteRenderer = GetComponent<SpriteRenderer>();
+        door = activate.GetComponent<RoomDoor>();
 		normalSprite = spriteRenderer.sprite;
 	}
 	
@@ -30,7 +30,7 @@ public class Button : MonoBehaviour {
 		
 		if(amount == 0) {
 			spriteRenderer.sprite = pressSprite;
-			GameController.main.petriNet.AddMarkers(pressPetriName, 1);
+            door.Activate();
 		}
 		amount++;
 	}
@@ -41,9 +41,9 @@ public class Button : MonoBehaviour {
 		
 		amount--;
 		if(amount <= 0) {
-			amount = 0;
+            door.Deactivate();
+            amount = 0;
 			spriteRenderer.sprite = normalSprite;
-			GameController.main.petriNet.AddMarkers(upPetriName, 1);
 		}
 	}
 

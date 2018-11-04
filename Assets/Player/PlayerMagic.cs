@@ -6,6 +6,7 @@ public class PlayerMagic : MonoBehaviour {
 
 	private PetriNetPlace magicOrbPlace;
 	private PlayerMovement movement;
+    private PlayerStatus status;
 
 	private LineRenderer telekineseLine;
 	private Rigidbody2D telekineseRigidbody;
@@ -23,17 +24,18 @@ public class PlayerMagic : MonoBehaviour {
 
 	void Awake() {
 		movement = GetComponent<PlayerMovement>();
-		telekineseLine = GetComponent<LineRenderer>();		
+    	status = GetComponent<PlayerStatus>();
+        telekineseLine = GetComponent<LineRenderer>();		
 		telekineseRigidbody = null;
 	}
 
-	void Start () {
-		magicOrbPlace = GameController.main.petriNet.GetPlace ("magic_orb_picked");		
-	}
-	
+	void Start() {
+        status = PlayerStatus.main;
+    }
+
 	void Update () {
 		
-		if(isActive) {
+		if(status.HasOrb) {
 			if(Input.GetKeyDown(KeyCode.E)) {
 				Starttelekinese();
 			} else if(Input.GetKeyUp(KeyCode.E)) {

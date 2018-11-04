@@ -126,7 +126,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3e21418602eb452cb75fd75053978fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  petriName: weapon
+  type: 0
+  activate: {fileID: 0}
   emptySprite: {fileID: 21300044, guid: 6c448d5cc7562a94788bfc1414e769a3, type: 3}
 --- !u!212 &212543827376903848
 SpriteRenderer:

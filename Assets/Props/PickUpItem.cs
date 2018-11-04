@@ -4,17 +4,29 @@ using UnityEngine;
 
 public class PickUpItem : MonoBehaviour {
 
-	public string petriName;
+    public enum PickUpType {
+        Weapon, Orb
+    }
+
+    public PickUpType type;
+	public GameObject activate;
 	public Sprite emptySprite;
 	
 	void OnTriggerEnter2D(Collider2D coll) {
 		Player player = coll.GetComponent<Player>();
 		if(player) {
-			GameController.main.petriNet.AddMarkers(petriName, 1);
 			//Destroy(this.gameObject);
 			GetComponent<BoxCollider2D>().enabled = false;
             GetComponentInChildren<Animator>().enabled = false;
 			GetComponentInChildren<SpriteRenderer>().sprite = emptySprite;
+
+            activate.GetComponent<RoomDoor>().Activate();
+
+			if(type == PickUpType.Weapon) {
+				PlayerStatus.main.HasWeapon = true;
+			} else if(type == PickUpType.Orb) {
+				PlayerStatus.main.HasOrb = true;
+			}
 		}
 	}
 

@@ -99,7 +99,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1868766254864900}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -12.47, y: -0.07, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4091743911945436}
@@ -197,8 +197,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1024
   attackEffectPrefab: {fileID: 1974351576075582, guid: cd545e7ba2afe45098bbfd38970bb77e,
-    type: 2}
-  attackProjectilePrefab: {fileID: 1442976154610390, guid: b38a69bb008f64226aaf1865913f90ca,
     type: 2}
   spinAttackTime: 1
 --- !u!114 &114908301544954098

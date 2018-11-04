@@ -6,6 +6,7 @@ public class PlayerAttack : MonoBehaviour {
 
 	private PetriNetPlace weaponPlace;
 	private PlayerMovement movement;
+    private PlayerStatus status;
 	private SpriteRenderer attackIndicatorSprite;
 
 	[SerializeField]
@@ -15,18 +16,10 @@ public class PlayerAttack : MonoBehaviour {
 	[SerializeField]
 	private GameObject attackEffectPrefab;
 	[SerializeField]
-	private GameObject attackProjectilePrefab;
-	[SerializeField]
 	private float spinAttackTime = 1f;
 	private float attackStartTime;
 	private bool isChargingAttack;
 	private float chargeTime;
-
-	private bool isActive {
-		get {
-			return weaponPlace.Markers > 0;
-		}
-	}
 
 	void Awake() {
 		movement = GetComponent<PlayerMovement>();
@@ -34,13 +27,13 @@ public class PlayerAttack : MonoBehaviour {
 		attackIndicatorSprite.enabled = false;
 	}
 
-	void Start () {
-		weaponPlace = GameController.main.petriNet.GetPlace ("weapon_picked");		
-	}
+	void Start() {
+        status = PlayerStatus.main;
+    }
 	
 	void Update () {
 		
-		if(isActive) {
+		if(status.HasWeapon) {
 			if(Input.GetKeyDown(KeyCode.Space)) {
 				StartAttack();
 			} else if(Input.GetKeyUp(KeyCode.Space)) {
