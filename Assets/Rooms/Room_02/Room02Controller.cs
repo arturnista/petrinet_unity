@@ -4,8 +4,21 @@ using UnityEngine;
 
 public class Room02Controller : RoomController {
 
-	public override void MonsterDead() {
-		roomDoor.Activate(true);
+    ButtonRoom02[] buttons;
+
+	void Start () {
+        buttons = GameObject.FindObjectsOfType<ButtonRoom02>();
 	}
 
+    public void ActivateButton() {
+		foreach(ButtonRoom02 btn in buttons) {
+			if(!btn.isRightPressed) return;
+		}
+
+		roomDoor.Activate();
+	}
+
+	public void DeactivateButton() {
+		roomDoor.Deactivate();
+	}
 }

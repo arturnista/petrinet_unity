@@ -49,7 +49,7 @@ public class RoomDoor : MonoBehaviour {
 		return player != null;
 	}
 
-	void OnTriggerEnter2D(Collider2D coll) {
+	protected virtual void OnTriggerEnter2D(Collider2D coll) {
 		if(!this.CheckEnd(coll)) return;
         SceneManager.LoadScene(roomName, LoadSceneMode.Single);
 	}

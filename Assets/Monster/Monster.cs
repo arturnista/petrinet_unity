@@ -11,6 +11,8 @@ class PatrolPosition {
 public class Monster : MonoBehaviour {
 
 	public float health;
+	public bool startPatroling;
+	public bool runFromTarget;
 
     private Animator animator;
 	private Rigidbody2D mRigidbody;
@@ -23,7 +25,7 @@ public class Monster : MonoBehaviour {
 	[SerializeField]
 	private List<PatrolPosition> patrolList;
 	private int patrolIndex;
-
+	
 	private bool isPatroling;
 	private bool isWaitingPatrol;
 	private float waitingPatrolTime;
@@ -41,7 +43,7 @@ public class Monster : MonoBehaviour {
 
 		maxHealth = health;
 		patrolIndex = 0;
-		isPatroling = true;
+		isPatroling = startPatroling;
 	}
 
 	void Start() {
@@ -73,23 +75,43 @@ public class Monster : MonoBehaviour {
 			}
 
 
-		} else {
+		} else if(target != null) {
 
 			Vector3 direction = target.transform.position - transform.position;
-            moveVelocity = direction.normalized * moveSpeed;
-			if(extraVelocity.sqrMagnitude != 0) extraVelocity = Vector3.MoveTowards(extraVelocity, Vector3.zero, moveSpeed * Time.deltaTime);
+			if(runFromTarget) {
+                direction.x = -direction.x;
+                direction.y = -direction.y;
+			}
 
+			if(direction.sqrMagnitude > 36) {
+
+                target = null;
+                isPatroling = startPatroling;
+
+			} else {
+
+                moveVelocity = direction.normalized * moveSpeed;
+
+            }
 			//transform.position = Vector3.MoveTowards(transform.position, target.transform.position, moveSpeed * Time.deltaTime);			
+
+		} else {
+
+            moveVelocity = new Vector3(Random.Range(-2f, 2f), Random.Range(-2f, 2f), 0);
 
 		}
 
-	}
+        if (extraVelocity.sqrMagnitude != 0) extraVelocity = Vector3.MoveTowards(extraVelocity, Vector3.zero, moveSpeed * Time.deltaTime);
+
+    }
 
 	void FixedUpdate() {
         mRigidbody.velocity = moveVelocity + extraVelocity;
 	}
 
 	void OnCollisionEnter2D(Collision2D coll) {
+		if(runFromTarget) return;
+		
 		PlayerHealth player = coll.collider.GetComponent<PlayerHealth>();
 		if(player) {
 			player.TakeDamage(10f, transform.position);
@@ -102,7 +124,7 @@ public class Monster : MonoBehaviour {
 	}
 
 	public void TakeDamage(float dmg, Transform attacker) {
-        animator.SetTrigger("take_damage");
+        if (animator) animator.SetTrigger("take_damage");
 
 		extraVelocity = Vector3.Normalize(transform.position - attacker.position) * 6f;
 

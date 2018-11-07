@@ -9,17 +9,17 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1929758325576666}
+  m_RootGameObject: {fileID: 1611607127230458}
   m_IsPrefabAsset: 1
---- !u!1 &1929758325576666
+--- !u!1 &1611607127230458
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4338999409518572}
-  - component: {fileID: 114386661365659430}
+  - component: {fileID: 4753509952756252}
+  - component: {fileID: 114153251275081514}
   m_Layer: 0
   m_Name: Room02Controller
   m_TagString: Untagged
@@ -27,12 +27,12 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4338999409518572
+--- !u!4 &4753509952756252
 Transform:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1929758325576666}
+  m_GameObject: {fileID: 1611607127230458}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -40,14 +40,15 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114386661365659430
+--- !u!114 &114153251275081514
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1929758325576666}
+  m_GameObject: {fileID: 1611607127230458}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f7a54a4eb67978344b380f52f27220f0, type: 3}
+  m_Script: {fileID: 11500000, guid: 8366c879361434f45bb3827bcd4d1523, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  roomDoorObject: {fileID: 0}

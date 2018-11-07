@@ -12,6 +12,8 @@ public class CameraBehavior : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		if(!player) return;
+
 		Vector3 nPos = player.transform.position;
         nPos.z = -10f;
 
