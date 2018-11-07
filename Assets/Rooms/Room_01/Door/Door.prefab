@@ -20,7 +20,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4273915933918400}
   - component: {fileID: 61901173303101336}
-  - component: {fileID: 114454756716289086}
   - component: {fileID: 114229661513972146}
   m_Layer: 0
   m_Name: Door
@@ -108,23 +107,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b4088cbc92d0834c9006f1da963f78e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  roomName: Rooms/Room_03/Scene
+  roomName: Rooms/Room_05/Scene
   openSprite: {fileID: 21300000, guid: ec32f9892cd7442d8b32446af905867b, type: 3}
   startOpen: 0
---- !u!114 &114454756716289086
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1161365235698892}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a105f357d6610498b807096dca5cf516, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  roomName: Rooms/Room_03/Scene
-  openSprite: {fileID: 21300000, guid: ec32f9892cd7442d8b32446af905867b, type: 3}
-  startOpen: 0
+  offensiveRoomName: Rooms/Room_04/Scene
 --- !u!212 &212343166654372274
 SpriteRenderer:
   m_ObjectHideFlags: 1

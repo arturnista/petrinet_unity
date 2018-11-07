@@ -7,6 +7,8 @@ public class Room04Controller : RoomController {
 	int monsterAmount;
 
 	void Start () {
+        PlayerStatus.main.HasCharger = true;
+		
 		Monster[] monsters = GameObject.FindObjectsOfType<Monster>();
         monsterAmount = 0;
         foreach(Monster mon in monsters) {

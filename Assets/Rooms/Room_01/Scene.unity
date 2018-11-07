@@ -24239,7 +24239,7 @@ Prefab:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 114604267840521212, guid: 87f09aa125f5de942b7a64be4e2326ff,
+    - target: {fileID: 114652153369512268, guid: 87f09aa125f5de942b7a64be4e2326ff,
         type: 2}
       propertyPath: roomDoorObject
       value: 

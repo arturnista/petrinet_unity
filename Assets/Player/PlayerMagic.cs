@@ -9,6 +9,7 @@ public class PlayerMagic : MonoBehaviour {
     private PlayerStatus status;
 
 	private LineRenderer telekineseLine;
+    private Transform telekineseTransform;
 	private Rigidbody2D telekineseRigidbody;
 	private Vector3 telekineseOffset;
 	[SerializeField]
@@ -27,6 +28,7 @@ public class PlayerMagic : MonoBehaviour {
     	status = GetComponent<PlayerStatus>();
         telekineseLine = GetComponent<LineRenderer>();		
 		telekineseRigidbody = null;
+        telekineseTransform = null;
 	}
 
 	void Start() {
@@ -43,11 +45,11 @@ public class PlayerMagic : MonoBehaviour {
 			}
 		}
 
-		if(telekineseRigidbody) {
-			telekineseRigidbody.velocity = movement.GetMoveVelocity();
+		if(telekineseTransform) {
+			if(telekineseRigidbody) telekineseRigidbody.velocity = movement.GetMoveVelocity();
 
 			telekineseLine.SetPosition(0, transform.position);
-			telekineseLine.SetPosition(1, telekineseRigidbody.transform.position);
+			telekineseLine.SetPosition(1, telekineseTransform.position);
 		}
 	}
 
@@ -56,9 +58,13 @@ public class PlayerMagic : MonoBehaviour {
 		if(coll) {
 			movement.isActive = false;			
 			telekineseLine.enabled = true;
+            telekineseTransform = coll.transform;
 			telekineseRigidbody = coll.transform.GetComponent<Rigidbody2D>();
-			telekineseOffset = transform.position - telekineseRigidbody.transform.position;
-			telekineseRigidbody.velocity = Vector2.zero;
+			telekineseOffset = transform.position - telekineseTransform.position;
+			if(telekineseRigidbody) telekineseRigidbody.velocity = Vector2.zero;
+
+            RoomDoor door = coll.transform.GetComponent<RoomDoor>();
+			if(door) door.Activate();
 		}
 	}
 
@@ -66,6 +72,7 @@ public class PlayerMagic : MonoBehaviour {
 		movement.isActive = true;
 
 		telekineseLine.enabled = false;
-		telekineseRigidbody = null;		
+		telekineseRigidbody = null;
+        telekineseTransform = null;	
 	}
 }

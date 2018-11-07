@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Room01Controller : RoomController {
+public class Room05Controller : RoomController {
 
-	public int monsterAmount;
+	int monsterAmount;
 
 	void Start () {
+        PlayerStatus.main.HasHammer = true;
+
 		Monster[] monsters = GameObject.FindObjectsOfType<Monster>();
         monsterAmount = 0;
         foreach(Monster mon in monsters) {

@@ -26,6 +26,8 @@ public class Monster : MonoBehaviour {
 	private List<PatrolPosition> patrolList;
 	private int patrolIndex;
 	
+	private float stunTime = 0;
+
 	private bool isPatroling;
 	private bool isWaitingPatrol;
 	private float waitingPatrolTime;
@@ -52,7 +54,15 @@ public class Monster : MonoBehaviour {
 	
 	void Update () {
 
+        if(stunTime > 0) {
+            stunTime -= Time.deltaTime;
+            moveVelocity = Vector2.zero;
+            return;
+		}
+
 		if(isPatroling) {
+
+            moveVelocity = Vector2.zero;
 
 			if(isWaitingPatrol) {
 
@@ -106,11 +116,14 @@ public class Monster : MonoBehaviour {
     }
 
 	void FixedUpdate() {
+        if (stunTime > 0) return;
+
         mRigidbody.velocity = moveVelocity + extraVelocity;
 	}
 
 	void OnCollisionEnter2D(Collision2D coll) {
 		if(runFromTarget) return;
+		if(this.stunTime > 0) return;
 		
 		PlayerHealth player = coll.collider.GetComponent<PlayerHealth>();
 		if(player) {
@@ -122,6 +135,12 @@ public class Monster : MonoBehaviour {
 		isPatroling = false;
 		this.target = target;
 	}
+
+	public void Stun(float stunTime) {
+		this.stunTime = stunTime;
+        moveVelocity = Vector2.zero;
+        extraVelocity = Vector2.zero;
+    }
 
 	public void TakeDamage(float dmg, Transform attacker) {
         if (animator) animator.SetTrigger("take_damage");

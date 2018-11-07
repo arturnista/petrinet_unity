@@ -66,7 +66,11 @@ public class PlayerAttack : MonoBehaviour {
 
 		if(attackHoldTime < spinAttackTime) {
 			BasicAttack();
-		} else {
+		} else if(status.HasHammer) {
+			HammerAttack();
+		} else if(status.HasCharger) {
+			ChargerAttack();
+		} else  {
 			SpinAttack();
 		}
 
@@ -95,6 +99,43 @@ public class PlayerAttack : MonoBehaviour {
 
 		Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, range, attackLayer);
 		DamageMonsters(colliders, 1f);	
+	}
+
+    void HammerAttack() {
+        float range = 3f;
+
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, range, attackLayer);
+        StunMonsters(colliders, 1f);
+
+    }
+	
+	void ChargerAttack() {
+		Vector2 size = new Vector2(1.5f, 8f);
+		float playerHalfSize = 4f;
+        Vector2 origin = transform.position + transform.up * playerHalfSize;
+
+        DebugPhysics.Box box = new DebugPhysics.Box(origin, size / 2f, Quaternion.AngleAxis(movement.Angle, Vector3.forward));
+        DebugPhysics.DrawBox(box, Color.red, 2f);
+
+        Collider2D[] colliders = Physics2D.OverlapBoxAll(origin, size, movement.Angle, attackLayer);
+        DamageMonsters(colliders, 1f);
+
+		transform.position = transform.position + transform.up * playerHalfSize * 2f;
+    }
+
+	void StunMonsters(Collider2D[] colliders, float dmgMultiplier) {
+		if(colliders.Length == 0) return;
+		
+		bool hasSet = false;
+
+        foreach (Collider2D coll in colliders) {
+			Monster monster = coll.transform.GetComponent<Monster>();
+			if(monster) {
+                if(!hasSet) monster.runFromTarget = true;
+				hasSet = true;
+				monster.Stun(8f);
+			}
+		}
 	}
 
 	void DamageMonsters(Collider2D[] colliders, float dmgMultiplier) {
