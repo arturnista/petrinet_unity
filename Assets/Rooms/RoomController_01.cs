@@ -10,6 +10,8 @@ public class RoomController_01 : RoomController {
 	protected override void Start() {
 		base.Start();
 		monsterKilled = 0;
+
+		PlayerStatus.main.HasWeapon = true;
 	}
 
 	public override void MonsterDead() {

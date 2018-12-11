@@ -28,6 +28,7 @@ public class Monster : MonoBehaviour {
 	
 	private float stunTime = 0;
 
+	private bool isDead;
 	private bool isPatroling;
 	private bool isWaitingPatrol;
 	private float waitingPatrolTime;
@@ -53,6 +54,7 @@ public class Monster : MonoBehaviour {
 	}
 	
 	void Update () {
+		if(isDead) return;
 
         if(stunTime > 0) {
             stunTime -= Time.deltaTime;
@@ -116,14 +118,16 @@ public class Monster : MonoBehaviour {
     }
 
 	void FixedUpdate() {
+		if (isDead) return;
         if (stunTime > 0) return;
 
         mRigidbody.velocity = moveVelocity + extraVelocity;
 	}
 
 	void OnCollisionEnter2D(Collision2D coll) {
-		if(runFromTarget) return;
-		if(this.stunTime > 0) return;
+		if (isDead) return;
+		if (runFromTarget) return;
+		if (this.stunTime > 0) return;
 		
 		PlayerHealth player = coll.collider.GetComponent<PlayerHealth>();
 		if(player) {
@@ -149,7 +153,8 @@ public class Monster : MonoBehaviour {
 
 		health -= dmg;
 		if(health <= 0) {
-			Destroy(this.gameObject);
+        	animator.SetTrigger("die");
+			isDead = true;
             roomController.MonsterDead();
 		}
 	}

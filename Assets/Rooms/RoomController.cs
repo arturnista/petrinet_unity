@@ -6,6 +6,13 @@ public class RoomController : MonoBehaviour {
 
 	protected RoomDoor door;
 
+	protected virtual void Awake () {
+		if(PlayerStatus.main == null) {
+			GameObject ps = new GameObject("PlayerStatus");
+			ps.AddComponent<PlayerStatus>();
+		}
+	}
+
 	protected virtual void Start () {
 		door = GameObject.FindObjectOfType<RoomDoor>();
 	}
