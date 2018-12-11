@@ -4,9 +4,14 @@ using UnityEngine;
 
 public class RoomController : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-		
+	public int monsterRequired;
+
+	private RoomDoor door;
+	private int monsterKilled;
+
+	protected virtual void Start () {
+		door = GameObject.FindObjectOfType<RoomDoor>();
+		monsterKilled = 0;
 	}
 	
 	// Update is called once per frame
@@ -14,8 +19,13 @@ public class RoomController : MonoBehaviour {
 		
 	}
 
-	public void MonsterDead() {
-
+	public void OpenDoor() {
+		door.Activate();
 	}
-	
+
+	public void MonsterDead() {
+		monsterKilled += 1;
+		if(monsterKilled >= monsterRequired) door.Activate();
+	}
+
 }

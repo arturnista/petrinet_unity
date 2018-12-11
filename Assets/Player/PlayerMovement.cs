@@ -27,6 +27,7 @@ public class PlayerMovement : MonoBehaviour {
 	public bool isActive;
 
 	private Rigidbody2D mRigidbody;
+	private SpriteRenderer spriteRenderer;
 
 	private float angle = 0;
 	public float Angle {
@@ -37,6 +38,7 @@ public class PlayerMovement : MonoBehaviour {
 
 	void Awake () {
 		mRigidbody = GetComponent<Rigidbody2D> ();
+		spriteRenderer = GetComponentInChildren<SpriteRenderer>();
 		moveSpeedMultiplier = 1f;
 		isActive = true;
 	}
@@ -57,6 +59,19 @@ public class PlayerMovement : MonoBehaviour {
 	}
 
 	public Vector2 GetMoveVelocity() {
+		float hor = Input.GetAxisRaw ("Horizontal");
+		float ver = Input.GetAxisRaw ("Vertical");
+
+		float mult = 1f;
+		if(hor != 0 && ver != 0) mult = .7f;
+
+		if(hor < 0f) spriteRenderer.flipX = true;
+		else spriteRenderer.flipX = false;
+
+		return new Vector2(hor, ver) * mult * moveSpeed * moveSpeedMultiplier;
+	}
+
+	public Vector2 GetMoveVelocityRotating() {
 		float hor = Input.GetAxisRaw ("Horizontal");
 		float ver = Input.GetAxisRaw ("Vertical");
 

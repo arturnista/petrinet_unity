@@ -20,7 +20,7 @@ public class PickUpItem : MonoBehaviour {
             GetComponentInChildren<Animator>().enabled = false;
 			GetComponentInChildren<SpriteRenderer>().sprite = emptySprite;
 
-            activate.GetComponent<RoomDoor>().Activate();
+            GameObject.FindObjectOfType<RoomController>().OpenDoor();
 
 			if(type == PickUpType.Weapon) {
 				PlayerStatus.main.HasWeapon = true;

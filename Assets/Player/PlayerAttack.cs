@@ -6,7 +6,6 @@ public class PlayerAttack : MonoBehaviour {
 
 	private PlayerMovement movement;
     private PlayerStatus status;
-	private SpriteRenderer attackIndicatorSprite;
 
 	[SerializeField]
 	private float damage;
@@ -15,15 +14,13 @@ public class PlayerAttack : MonoBehaviour {
 	[SerializeField]
 	private GameObject attackEffectPrefab;
 	[SerializeField]
-	private float spinAttackTime = 1f;
-	private float attackStartTime;
-	private bool isChargingAttack;
-	private float chargeTime;
+	private float specialAttackCooldown;
+	private float specialAttackDelay;
+	private bool specialIsDisabled;
 
 	void Awake() {
 		movement = GetComponent<PlayerMovement>();
-		attackIndicatorSprite = transform.Find("SpriteAttackIndicator").GetComponent<SpriteRenderer>();
-		attackIndicatorSprite.enabled = false;
+		specialIsDisabled = false;
 	}
 
 	void Start() {
@@ -39,41 +36,35 @@ public class PlayerAttack : MonoBehaviour {
 				StopAttack();
 			}
 
-		}
+			if(specialIsDisabled) {
 
-		if(isChargingAttack) {
-			chargeTime += Time.deltaTime;
+				specialAttackDelay += Time.deltaTime;
+				if(specialAttackDelay > specialAttackCooldown) specialIsDisabled = false;
+
+			} else if(Input.GetKeyDown(KeyCode.F)) {
+
+				specialAttackDelay = 0;
+				specialIsDisabled = true;
+
+				if(status.HasHammer) {
+					HammerAttack();
+				} else if(status.HasCharger) {
+					ChargerAttack();
+				} else  {
+					SpinAttack();
+				}
+			}
 			
-			if(chargeTime < spinAttackTime) attackIndicatorSprite.color = Color.white;
-			else attackIndicatorSprite.color = Color.red;
 		}
 	}
 
 	void StartAttack() {
-		attackStartTime = Time.time;
-		isChargingAttack = true;
-		
 		movement.MoveSpeedMultiplier = .3f;
-		chargeTime = 0f;
-		attackIndicatorSprite.enabled = true;
 	}
 
 	void StopAttack() {
-		float attackHoldTime = Time.time - attackStartTime;		
-		isChargingAttack = false;
-		attackIndicatorSprite.enabled = false;
-
-		if(attackHoldTime < spinAttackTime) {
-			BasicAttack();
-		} else if(status.HasHammer) {
-			HammerAttack();
-		} else if(status.HasCharger) {
-			ChargerAttack();
-		} else  {
-			SpinAttack();
-		}
-
 		movement.MoveSpeedMultiplier = 1f;
+		BasicAttack();
 	}
 
 	void BasicAttack() {

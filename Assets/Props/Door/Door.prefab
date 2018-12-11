@@ -109,7 +109,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   roomName: _Scenes/Room_01
   openSprite: {fileID: 0}
-  startOpen: 1
+  startOpen: 0
 --- !u!212 &212010935947757634
 SpriteRenderer:
   m_ObjectHideFlags: 1
