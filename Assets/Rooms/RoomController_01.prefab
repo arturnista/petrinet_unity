@@ -51,4 +51,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e659194969bc2384a9a85ab01c832ace, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monsterRequired: 1
+  monsterRequired: 10
