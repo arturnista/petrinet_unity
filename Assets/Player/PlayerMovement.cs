@@ -65,8 +65,23 @@ public class PlayerMovement : MonoBehaviour {
 		float mult = 1f;
 		if(hor != 0 && ver != 0) mult = .7f;
 
-		if(hor < 0f) spriteRenderer.flipX = true;
-		else spriteRenderer.flipX = false;
+		// if(hor < 0f) spriteRenderer.flipX = true;
+		// else spriteRenderer.flipX = false;
+
+		if(ver > 0) {
+			angle = 0f;
+
+			if(hor > 0) angle -= 45f;
+			else if(hor < 0) angle += 45f;
+		} else if(ver < 0) {
+			angle = 180f;		
+
+			if(hor > 0) angle += 45f;
+			else if(hor < 0) angle -= 45f;
+		} else if(hor > 0) angle = 270f;
+		else if(hor < 0) angle = 90f;
+
+		transform.eulerAngles = new Vector3 (0f, 0f, angle);
 
 		return new Vector2(hor, ver) * mult * moveSpeed * moveSpeedMultiplier;
 	}

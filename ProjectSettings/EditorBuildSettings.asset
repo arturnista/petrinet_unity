@@ -9,16 +9,16 @@ EditorBuildSettings:
     path: Assets/_Scenes/Start.unity
     guid: f348f0a71b6944ffb873831cfcb94c94
   - enabled: 1
-    path: Assets/_Scenes/Room_0.unity
+    path: Assets/_Scenes/Room_00.unity
     guid: fae82e731df5130478cf73e672478b00
   - enabled: 1
-    path: Assets/_Scenes/Room_1.unity
+    path: Assets/_Scenes/Room_01.unity
     guid: 1f146f1474e636944a65547e482f41fc
   - enabled: 1
-    path: Assets/_Scenes/Room_4.unity
+    path: Assets/_Scenes/Room_04.unity
     guid: 39050057e56295c4cb5f87e481490727
   - enabled: 1
-    path: Assets/_Scenes/Room_5.unity
+    path: Assets/_Scenes/Room_05.unity
     guid: bf9886e36aad2f3409b2c17ef1b08649
   - enabled: 1
     path: Assets/_Scenes/Final.unity
