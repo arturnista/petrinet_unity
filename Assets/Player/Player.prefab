@@ -55,6 +55,7 @@ GameObject:
   - component: {fileID: 61444200561501816}
   - component: {fileID: 120550365172577016}
   - component: {fileID: 114908301544954098}
+  - component: {fileID: 114518504167791172}
   - component: {fileID: 114358612655825884}
   - component: {fileID: 114711237037094070}
   - component: {fileID: 114446282925534704}
@@ -181,6 +182,17 @@ MonoBehaviour:
   telekineseLayer:
     serializedVersion: 2
     m_Bits: 4096
+--- !u!114 &114518504167791172
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1868766254864900}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2708d93854843704f906cf18a3a4de25, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114711237037094070
 MonoBehaviour:
   m_ObjectHideFlags: 1

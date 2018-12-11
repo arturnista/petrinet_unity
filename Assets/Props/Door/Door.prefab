@@ -8,15 +8,15 @@ Prefab:
     m_TransformParent: {fileID: 0}
     m_Modifications: []
     m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 0}
+  m_SourcePrefab: {fileID: 0}
   m_RootGameObject: {fileID: 1912531637291856}
-  m_IsPrefabParent: 1
+  m_IsPrefabAsset: 1
 --- !u!1 &1738220223799754
 GameObject:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 5
+  serializedVersion: 6
   m_Component:
   - component: {fileID: 4528507636770348}
   - component: {fileID: 212010935947757634}
@@ -30,13 +30,13 @@ GameObject:
 --- !u!1 &1912531637291856
 GameObject:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 5
+  serializedVersion: 6
   m_Component:
   - component: {fileID: 4199281819069412}
   - component: {fileID: 61006396287616448}
-  - component: {fileID: 114132996662510042}
+  - component: {fileID: 114389607367352602}
   m_Layer: 0
   m_Name: Door
   m_TagString: Untagged
@@ -47,11 +47,11 @@ GameObject:
 --- !u!4 &4199281819069412
 Transform:
   m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1912531637291856}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.5, y: 6.5, z: 0}
+  m_LocalPosition: {x: 0.5, y: 9.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4528507636770348}
@@ -61,7 +61,7 @@ Transform:
 --- !u!4 &4528507636770348
 Transform:
   m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1738220223799754}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -74,7 +74,7 @@ Transform:
 --- !u!61 &61006396287616448
 BoxCollider2D:
   m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1912531637291856}
   m_Enabled: 1
@@ -96,23 +96,24 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &114132996662510042
+--- !u!114 &114389607367352602
 MonoBehaviour:
   m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1912531637291856}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 69b877a77c24f4b20ad3cb6d522acb98, type: 3}
+  m_Script: {fileID: 11500000, guid: a105f357d6610498b807096dca5cf516, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  petriName: room_01_open_door
-  openSprite: {fileID: 21300000, guid: ec32f9892cd7442d8b32446af905867b, type: 3}
+  roomName: _Scenes/Room_01
+  openSprite: {fileID: 0}
+  startOpen: 1
 --- !u!212 &212010935947757634
 SpriteRenderer:
   m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1738220223799754}
   m_Enabled: 1
@@ -144,7 +145,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 5
-  m_Sprite: {fileID: 21300000, guid: fd49b0d70a3a24fb8b27c47bb8f7d9c8, type: 3}
+  m_Sprite: {fileID: 21300384, guid: 935d027858e75c441a5e713248c375e5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -154,3 +155,4 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
+  m_SpriteSortPoint: 0

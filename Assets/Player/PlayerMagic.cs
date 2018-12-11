@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class PlayerMagic : MonoBehaviour {
 
-	private PetriNetPlace magicOrbPlace;
 	private PlayerMovement movement;
     private PlayerStatus status;
 
@@ -16,12 +15,6 @@ public class PlayerMagic : MonoBehaviour {
 	private float telekineseRadius = 2f;
 	[SerializeField]
 	private LayerMask telekineseLayer;
-
-	private bool isActive {
-		get {
-			return magicOrbPlace.Markers > 0;
-		}
-	}
 
 	void Awake() {
 		movement = GetComponent<PlayerMovement>();

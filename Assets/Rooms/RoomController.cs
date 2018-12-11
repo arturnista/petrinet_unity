@@ -4,16 +4,18 @@ using UnityEngine;
 
 public class RoomController : MonoBehaviour {
 
-	public GameObject roomDoorObject;
-
-	protected RoomDoor roomDoor;
-
-	protected virtual void Awake() {
-        roomDoor = roomDoorObject.GetComponent<RoomDoor>();
+	// Use this for initialization
+	void Start () {
+		
 	}
 	
-	public virtual void MonsterDead () {
+	// Update is called once per frame
+	void Update () {
 		
+	}
+
+	public void MonsterDead() {
+
 	}
 	
 }

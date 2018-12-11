@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class PlayerAttack : MonoBehaviour {
 
-	private PetriNetPlace weaponPlace;
 	private PlayerMovement movement;
     private PlayerStatus status;
 	private SpriteRenderer attackIndicatorSprite;
