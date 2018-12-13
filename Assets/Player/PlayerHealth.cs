@@ -10,7 +10,6 @@ public class PlayerHealth : MonoBehaviour {
     [SerializeField]
     private float health = 100f;
     private float maxHealth;
-    private int sceneId;
     PlayerMovement movement;
 
     private Text healthText;
@@ -33,22 +32,18 @@ public class PlayerHealth : MonoBehaviour {
 
         maxHealth -= dmg;
         if (maxHealth <= 0) {
-            changeScene();
+            ChangeScene();
             //maxHealth = health;
             Destroy(this.gameObject);
         }
     }
 
 
-    void changeScene()
-    {
+    void ChangeScene() {
     
-        GetComponent<PressRestart>().id = SceneManager.GetActiveScene().buildIndex;
-        SceneManager.LoadScene("Restart", LoadSceneMode.Additive);
+        PlayerStatus.main.LastIdScene = SceneManager.GetActiveScene().buildIndex;
+        SceneManager.LoadScene("Restart", LoadSceneMode.Single);
 
     }
 
-    int id() {
-        return sceneId;
-    }
 }

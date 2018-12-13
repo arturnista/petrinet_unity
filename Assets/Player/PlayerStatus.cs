@@ -10,11 +10,13 @@ public class PlayerStatus : MonoBehaviour {
 	private bool hasOrb;
     private bool hasHammer;
     private bool hasCharger;
+    private int lastIdScene;
 
 	public bool HasOrb { get; set; }
     public bool HasWeapon { get; set; }
     public bool HasHammer { get; set; }
     public bool HasCharger { get; set; }
+    public int LastIdScene { get; set; }
 
 	void Awake () {
 		if(main != null) return;

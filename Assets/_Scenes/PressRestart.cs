@@ -2,19 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+
 public class PressRestart : MonoBehaviour
 {
-   public int id;
-   // PlayerHealth ph;
-    // Use this for initialization
-    void Start()
-    {
-        SceneManager.LoadScene(id);
+    public int id;
+
+    public void Quit() {
+        Application.Quit();        
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
+    public void Restart() {
+        SceneManager.LoadScene(PlayerStatus.main.LastIdScene);
     }
+    
 }
