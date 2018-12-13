@@ -81,7 +81,6 @@ public class PlayerMovement : MonoBehaviour {
 		if(hor < 0f) spriteRenderer.flipX = true;
 		else if(hor > 0f) spriteRenderer.flipX = false;
 		
-		Debug.Log(angle * -1);
 		transform.eulerAngles = new Vector3 (0f, 0f, angle);
 		spriteRenderer.transform.eulerAngles = new Vector3 (0f, 0f, 0f);
 
