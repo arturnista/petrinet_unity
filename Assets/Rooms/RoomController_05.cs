@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RoomController_04 : RoomController {
+public class RoomController_05 : RoomController {
 
 	public int monsterRequired;
 	private int monsterKilled;
@@ -11,7 +11,7 @@ public class RoomController_04 : RoomController {
 		base.Start();
 
 		PlayerStatus.main.HasWeapon = true;
-		PlayerStatus.main.HasCharger = true;
+		PlayerStatus.main.HasHammer = true;
 	}
 
 	public override void MonsterDead() {

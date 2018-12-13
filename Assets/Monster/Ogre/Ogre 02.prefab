@@ -797,7 +797,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 750acf674bc634a52a09b5e57ae545ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 1000
+  health: 300
   startPatroling: 0
   runFromTarget: 0
   patrolMoveSpeed: 0

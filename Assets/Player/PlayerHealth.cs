@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-//quando morrer
+using EZCameraShake;
 using UnityEngine.SceneManagement;
+
 
 public class PlayerHealth : MonoBehaviour {
 
@@ -29,6 +30,7 @@ public class PlayerHealth : MonoBehaviour {
 
     public void TakeDamage(float dmg, Vector3 enemyPosition) {
         movement.AddExtraVelocity(Vector3.Normalize(transform.position - enemyPosition) * 10f);
+		CameraShaker.Instance.ShakeOnce(3f, 3f, .1f, .4f);
 
         maxHealth -= dmg;
         if (maxHealth <= 0) {

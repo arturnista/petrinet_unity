@@ -19,9 +19,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4684374733899222}
-  - component: {fileID: 114722064422330778}
+  - component: {fileID: 114813160300328382}
   m_Layer: 0
-  m_Name: RoomController_04
+  m_Name: RoomController_05
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -40,7 +40,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114722064422330778
+--- !u!114 &114813160300328382
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -48,7 +48,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 1279675555014750}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f44ebb67e754f734ba2283b7b3d17a74, type: 3}
+  m_Script: {fileID: 11500000, guid: 09c05ff63f0074456b6a21194f351aeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monsterRequired: 7

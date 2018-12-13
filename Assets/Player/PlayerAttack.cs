@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using EZCameraShake;
 
 public class PlayerAttack : MonoBehaviour {
 
@@ -92,7 +93,9 @@ public class PlayerAttack : MonoBehaviour {
 	}
 
     void HammerAttack() {
-        float range = 3f;
+        float range = 100f;
+
+		CameraShaker.Instance.ShakeOnce(4f, 4f, .1f, .6f);
 
         Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, range, attackLayer);
         StunMonsters(colliders, 1f);
