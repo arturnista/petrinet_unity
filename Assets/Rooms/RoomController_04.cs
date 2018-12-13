@@ -10,13 +10,14 @@ public class RoomController_04 : RoomController {
 	protected override void Start() {
 		base.Start();
 
+		monsterKilled = 0;
 		PlayerStatus.main.HasWeapon = true;
 		PlayerStatus.main.HasCharger = true;
 	}
 
 	public override void MonsterDead() {
 		monsterKilled += 1;
-		if(monsterKilled == monsterRequired) {
+		if(monsterKilled >= monsterRequired) {
 			door.Activate();
 		}
 	}

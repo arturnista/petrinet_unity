@@ -1,10 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using EZCameraShake;
+using UnityEngine;
 
 public class PlayerAttack : MonoBehaviour {
 
+	private PlayerHealth health;
 	private PlayerMovement movement;
     private PlayerStatus status;
 
@@ -15,12 +16,19 @@ public class PlayerAttack : MonoBehaviour {
 	[SerializeField]
 	private GameObject attackEffectPrefab;
 	[SerializeField]
+	private GameObject hammerPoundPrefab;
+	[SerializeField]
 	private float specialAttackCooldown;
 	private float specialAttackDelay;
 	private bool specialIsDisabled;
+	
+	private TrailRenderer chargerTrail;
 
 	void Awake() {
+		chargerTrail = transform.Find("Charger").GetComponent<TrailRenderer>();
+		chargerTrail.enabled = false;
 		movement = GetComponent<PlayerMovement>();
+		health = GetComponent<PlayerHealth>();
 		specialIsDisabled = false;
 	}
 
@@ -55,6 +63,8 @@ public class PlayerAttack : MonoBehaviour {
 					SpinAttack();
 				}
 			}
+			
+			chargerTrail.enabled = false;
 			
 		}
 	}
@@ -96,6 +106,7 @@ public class PlayerAttack : MonoBehaviour {
         float range = 100f;
 
 		CameraShaker.Instance.ShakeOnce(4f, 4f, .1f, .6f);
+		Instantiate(hammerPoundPrefab, transform.position, Quaternion.identity);
 
         Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, range, attackLayer);
         StunMonsters(colliders, 1f);
@@ -103,6 +114,8 @@ public class PlayerAttack : MonoBehaviour {
     }
 	
 	void ChargerAttack() {
+		health.AddInvulnerabilityTime(1f);
+		chargerTrail.enabled = true;
 		Vector2 size = new Vector2(1.5f, 8f);
 		float playerHalfSize = 4f;
         Vector2 origin = transform.position + transform.up * playerHalfSize;
@@ -124,9 +137,9 @@ public class PlayerAttack : MonoBehaviour {
         foreach (Collider2D coll in colliders) {
 			Monster monster = coll.transform.GetComponent<Monster>();
 			if(monster) {
-                if(!hasSet) monster.runFromTarget = true;
+                if(!hasSet && !monster.runFromTarget) monster.runFromTarget = true;
 				hasSet = true;
-				monster.Stun(8f);
+				monster.Stun(2f);
 			}
 		}
 	}

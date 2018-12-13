@@ -119,7 +119,6 @@ public class Monster : MonoBehaviour {
 
 	void FixedUpdate() {
 		if (isDead) return;
-        if (stunTime > 0) return;
 
         mRigidbody.velocity = moveVelocity + extraVelocity;
 	}
