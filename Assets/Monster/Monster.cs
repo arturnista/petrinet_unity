@@ -11,6 +11,7 @@ class PatrolPosition {
 public class Monster : MonoBehaviour {
 
 	public float health;
+	public float damage = 10f;
 	public bool startPatroling;
 	public bool runFromTarget;
 
@@ -130,7 +131,7 @@ public class Monster : MonoBehaviour {
 		
 		PlayerHealth player = coll.collider.GetComponent<PlayerHealth>();
 		if(player) {
-			player.TakeDamage(10f, transform.position);
+			player.TakeDamage(damage, transform.position);
 		}
 	}
 
@@ -153,8 +154,8 @@ public class Monster : MonoBehaviour {
 		health -= dmg;
 		if(health <= 0) {
         	animator.SetTrigger("die");
+            if(!isDead) roomController.MonsterDead();
 			isDead = true;
-            roomController.MonsterDead();
 		}
 	}
 }

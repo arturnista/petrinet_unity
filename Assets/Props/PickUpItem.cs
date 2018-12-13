@@ -24,6 +24,8 @@ public class PickUpItem : MonoBehaviour {
 
 			if(type == PickUpType.Weapon) {
 				PlayerStatus.main.HasWeapon = true;
+				PlayerStatus.main.HasHammer = false;
+				PlayerStatus.main.HasCharger = false;
 			} else if(type == PickUpType.Orb) {
 				PlayerStatus.main.HasOrb = true;
 			}

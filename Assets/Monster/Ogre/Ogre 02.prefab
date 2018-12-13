@@ -742,7 +742,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!61 &61258230635419198
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -798,10 +798,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 300
+  damage: 30
   startPatroling: 0
   runFromTarget: 0
   patrolMoveSpeed: 0
-  moveSpeed: 0
+  moveSpeed: 1.5
   patrolList: []
 --- !u!212 &212304077121099358
 SpriteRenderer:

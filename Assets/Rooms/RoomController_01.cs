@@ -17,10 +17,10 @@ public class RoomController_01 : RoomController {
 	public override void MonsterDead() {
 		monsterKilled += 1;
 		if(monsterKilled == monsterRequired) {
-			door.roomName = "_Scenes/Room_04";
+			door.roomName = "_Scenes/Room_05";
 			door.Activate();
 		} else if(monsterKilled > monsterRequired) {
-			door.roomName = "_Scenes/Room_05";
+			door.roomName = "_Scenes/Room_04";
 		}
 	}
 

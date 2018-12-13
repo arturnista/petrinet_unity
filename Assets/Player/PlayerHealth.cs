@@ -28,6 +28,10 @@ public class PlayerHealth : MonoBehaviour {
     }
 
     void Update() {
+        if(Input.GetKeyDown(KeyCode.G)) {
+            health += 10f;
+            if(health > maxHealth) health = maxHealth;
+        }
         if(invulnerabilityTime > 0) {
             invulnerabilityTime -= Time.deltaTime;
         }
@@ -37,13 +41,12 @@ public class PlayerHealth : MonoBehaviour {
     public void TakeDamage(float dmg, Vector3 enemyPosition) {
         if(invulnerabilityTime > 0) return;
         
-        movement.AddExtraVelocity(Vector3.Normalize(transform.position - enemyPosition) * 10f);
+        movement.AddExtraVelocity(Vector3.Normalize(transform.position - enemyPosition) * dmg);
 		CameraShaker.Instance.ShakeOnce(3f, 3f, .1f, .4f);
 
         health -= dmg;
         if (health <= 0) {
             ChangeScene();
-            //maxHealth = health;
             Destroy(this.gameObject);
         }
     }
